@@ -1,0 +1,24 @@
+toolchain : 
+===========
+version 4.8 from linaro website.
+
+wget https://launchpad.net/linaro-toolchain-binaries/trunk/2013.06/+download/gcc-linaro-arm-linux-gnueabihf-4.8-2013.06_linux.tar.bz2
+
+linux kernel : 
+==============
+
+patched kernel 3.8 from github beagleboard repo
+
+git clone https://github.com/beagleboard/kernel.git
+git checkout 3.8
+./patch.sh
+wget http://arago-project.org/git/projects/?p=am33x-cm3.git;a=tree;f=bin
+mv index.html\?p\=am33x-cm3.git kernel/firmware/am335x-pm-firmware.bin
+
+busybox : 
+=========
+
+stable 1.21 from busybox.org
+
+git clonse git://git.busybox.net/busybox
+git checkout 1_21_stable
