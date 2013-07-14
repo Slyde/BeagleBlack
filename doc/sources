@@ -22,3 +22,12 @@ stable 1.21 from busybox.org
 
 git clonse git://git.busybox.net/busybox
 git checkout 1_21_stable
+
+apache 2.4:
+===========
+
+wget http://mirror.switch.ch/mirror/apache/dist//httpd/httpd-2.4.4.tar.bz2
+wget http://mirror.switch.ch/mirror/apache/dist//apr/apr-1.4.8.tar.gz
+wget http://mirror.switch.ch/mirror/apache/dist//apr/apr-util-1.5.2.tar.gz
+wget http://sourceforge.net/projects/pcre/files/pcre/8.33/pcre-8.33.tar.gz/download
+
