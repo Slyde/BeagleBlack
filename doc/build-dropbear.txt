@@ -1,0 +1,7 @@
+wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2013.58.tar.bz2
+<extract...>
+./configure --prefix=$ROOTFS --host=$TARGET_SYS
+make CROSS_COMPILE=arm-linux-gnueabihf-
+make install
+
+

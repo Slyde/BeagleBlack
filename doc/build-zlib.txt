@@ -1,0 +1,6 @@
+wget http://zlib.net/zlib-1.2.8.tar.gz
+./configure --prefix=$SYSROOT
+make CROSS_COMPILE=arm-linux-gnueabihf-
+cp zlib.h zconf.h $SYSROOT/usr/include/
+cp libz.* $ROOTFS/lib/
+
