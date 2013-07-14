@@ -1,0 +1,47 @@
+1. first build APR:
+$ wget http://mirror.switch.ch/mirror/apache/dist//apr/apr-1.4.8.tar.gz
+<extract...>
+
+1.1 Test iovec size on target
+create test.c : 
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+
+void main(void)
+{
+	printf("struct iovec size is %d\n", sizeof(struct iovec));
+}
+
+compile test.c for target and run it on target
+note the output size and set the value to ac_cv_sizeof_struct_iovec parameter
+
+1.2 Configure and build apr
+$ ./configure --prefix=$ROOTFS $CONFIGURE_FLAGS --with-sysroot=$SYSROOT ac_cv_file__dev_zero=yes ac_cv_func_setpgrp_void=yes apr_cv_tcp_nodelay_with_cork=yes ac_cv_sizeof_struct_iovec=8
+$ make 
+$ make isntall
+
+2. build APR-util
+$ wget http://mirror.switch.ch/mirror/apache/dist//apr/apr-util-1.5.2.tar.gz
+$ ./configure $CONFIGURE_FLAGS --prefix=$ROOTFS --with-apr=../apr-1.4.8/
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
+$ make install
+
+3. build lib pcre
+$ wget http://sourceforge.net/projects/pcre/files/pcre/8.33/pcre-8.33.tar.gz/download
+$ mv dowmload download.tar.gz
+$ tar xzvf download.tar.gz
+$ ./configure $CONFIGURE_FLAGS --prefix=$ROOTFS
+$ make install
+
+
+4. build apache httpd
+$ wget http://mirror.switch.ch/mirror/apache/dist//httpd/httpd-2.4.4.tar.bz2
+<extract...>
+$ wget https://issues.apache.org/bugzilla/attachment.cgi?id=28633
+$ mv attachment.cgi\?id\=28633 28633.patch
+$ patch < 28633.patch
+$ BUILDCC=gcc ./configure --prefix=$ROOTFS/usr/share/apache2.4.4 $CONFIGURE_FLAGS --with-apr=../apr-1.4.8/ --with-apr-util=../apr-util-1.5.2/ --with-pcre=$ROOTFS ap_cv_void_ptr_lt_long=no
+$ make CROSS_COMPILE=arm-linux-gnueabihf- BUILDCC=gcc
+$ make install
+
