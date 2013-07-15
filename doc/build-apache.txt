@@ -17,13 +17,15 @@ compile test.c for target and run it on target
 note the output size and set the value to ac_cv_sizeof_struct_iovec parameter
 
 1.2 Configure and build apr
-$ ./configure --prefix=$ROOTFS $CONFIGURE_FLAGS --with-sysroot=$SYSROOT ac_cv_file__dev_zero=yes ac_cv_func_setpgrp_void=yes apr_cv_tcp_nodelay_with_cork=yes ac_cv_sizeof_struct_iovec=8
+$ ./configure --prefix=$TMPINSTALL/apr $CONFIGURE_FLAGS --with-sysroot=$SYSROOT ac_cv_file__dev_zero=yes ac_cv_func_setpgrp_void=yes apr_cv_tcp_nodelay_with_cork=yes ac_cv_sizeof_struct_iovec=8
 $ make 
 $ make isntall
 
 2. build APR-util
+!! will be installed in same dir as apr library !!
+
 $ wget http://mirror.switch.ch/mirror/apache/dist//apr/apr-util-1.5.2.tar.gz
-$ ./configure $CONFIGURE_FLAGS --prefix=$ROOTFS --with-apr=../apr-1.4.8/
+$ ./configure $CONFIGURE_FLAGS --prefix=$SYSROOT/apr --with-apr=../apr-1.4.8/
 $ make CROSS_COMPILE=arm-linux-gnueabihf-
 $ make install
 
@@ -31,7 +33,8 @@ $ make install
 $ wget http://sourceforge.net/projects/pcre/files/pcre/8.33/pcre-8.33.tar.gz/download
 $ mv dowmload download.tar.gz
 $ tar xzvf download.tar.gz
-$ ./configure $CONFIGURE_FLAGS --prefix=$ROOTFS
+$ ./configure $CONFIGURE_FLAGS --prefix=$TMPINSTALL/pcre
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
 $ make install
 
 
@@ -41,7 +44,7 @@ $ wget http://mirror.switch.ch/mirror/apache/dist//httpd/httpd-2.4.4.tar.bz2
 $ wget https://issues.apache.org/bugzilla/attachment.cgi?id=28633
 $ mv attachment.cgi\?id\=28633 28633.patch
 $ patch < 28633.patch
-$ BUILDCC=gcc ./configure --prefix=$ROOTFS/usr/share/apache2.4.4 $CONFIGURE_FLAGS --with-apr=../apr-1.4.8/ --with-apr-util=../apr-util-1.5.2/ --with-pcre=$ROOTFS ap_cv_void_ptr_lt_long=no
+$ LDFLAGS+=" -lpthread" BUILDCC=gcc ./configure --prefix=$TMPINSTALL/apache24 $CONFIGURE_FLAGS --with-apr=../apr-1.4.8/ --with-apr-util=../apr-util-1.5.2/ --with-pcre=../install/pcre/ ap_cv_void_ptr_lt_long=no
 $ make CROSS_COMPILE=arm-linux-gnueabihf- BUILDCC=gcc
 $ make install
 

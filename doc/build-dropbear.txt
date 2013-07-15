@@ -1,7 +1,5 @@
-wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2013.58.tar.bz2
+$ wget https://matt.ucc.asn.au/dropbear/releases/dropbear-2013.58.tar.bz2
 <extract...>
-./configure --prefix=$ROOTFS --host=$TARGET_SYS
-make CROSS_COMPILE=arm-linux-gnueabihf-
-make install
-
-
+$ ./configure $CONFIGURE_FLAGS --prefix=$TMPINSTALL/dropbear --with-zlib=../zlib-1.2.8/
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
+$ fakeroot make install

@@ -20,8 +20,14 @@ busybox : 
 
 stable 1.21 from busybox.org
 
-git clonse git://git.busybox.net/busybox
+git clone git://git.busybox.net/busybox
 git checkout 1_21_stable
+
+zlib :
+======
+
+wget http://zlib.net/zlib-1.2.8.tar.gz
+
 
 apache 2.4:
 ===========
