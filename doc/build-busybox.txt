@@ -1,0 +1,7 @@
+$ make menuconfig
+<edit configuration...>
+
+$ cp ../../configs/busybox/BB_Busybox_1.config
+$ make CROSS_COMPILE=arm-linux-gnueabihf-
+$ make CROSS_COMPILE=arm-linux-gnueabihf- CONFIG_PREFIX=$TMPINSTALL/busybox install
+
