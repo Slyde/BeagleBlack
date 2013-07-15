@@ -15,6 +15,7 @@ export TARGET_PREFIX=$TARGET_SYS-
 export PATH=$SDK_PATH/bin:$PATH
 export SYSROOT=$PROJECT_HOME/sysroot
 export ROOTFS=$PROJECT_HOME/rootfs
+export TMPINSTALL=$PROJECT_HOME/apps/install/
 #export CPATH=$SDK_PATH/$TARGET_SYS/libc/usr/include:$CPATH
 export CC=${TARGET_PREFIX}gcc
 export CXX=${TARGET_PREFIX}g++
