@@ -1,2 +1,2 @@
-root:JieHlgExsbRb6:0:0:root:/root:/bin/sh
-slyde:x:1000:1000:Linux User,,,:/home/slyde/:/bin/sh
+root::0:0:root:/root:/bin/sh
+slyd3:x:1000:1000:Linux User,,,:/home/slyd3/:/bin/bash
