@@ -1,2 +1,2 @@
-root::0:0:root:/root:/bin/sh
+root:x:0:0:root:/root:/bin/sh
 slyd3:x:1000:1000:Linux User,,,:/home/slyd3/:/bin/bash
