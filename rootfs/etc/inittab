@@ -2,3 +2,4 @@
 #::respawn:-/bin/sh
 ::respawn:/sbin/getty 115200 ttyO0
 ::ctrlaltdel:/bin/umount -a -r
+
