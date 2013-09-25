@@ -1,2 +1,2 @@
-root:x:0:0:root:/root:/bin/sh
+root:x:0:0:root:/:/bin/sh
 slyd3:x:1000:1000:slyd3:/home/slyd3:/bin/ash
