@@ -1,2 +1,3 @@
-ssh	22/tcp	# SSH Remote Login Protocol
-ssh	22/udp
+ssh	63200/tcp
+ssh	63200/udp
+
