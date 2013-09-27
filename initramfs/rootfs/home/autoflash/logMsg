@@ -1,0 +1,35 @@
+#!/bin/sh
+
+log_msg() {
+	RED=$(tput setaf 1)
+	GREEN=$(tput setaf 2)
+	NORMAL=$(tput sgr0)
+	MSG="$1"
+	COL=$(($(tput cols)-${#MSG}+5))
+
+	SCRIPT=$2
+
+	echo -n $MSG
+	
+	if [ ! -x $SCRIPT ]
+	then
+		printf "%${COL}s"  "$RED[FAIL]$NORMAL"
+		echo ""
+		return 1
+	else
+		$SCRIPT
+		
+		if [ $? -eq 0 ]
+		then
+			printf "%${COL}s"  "$GREEN[OK]$NORMAL"
+			echo ""
+			return 0
+		else
+			printf "%${COL}s"  "$RED[KO]$NORMAL"
+			echo ""
+			return 1
+		fi
+	fi
+
+}
+

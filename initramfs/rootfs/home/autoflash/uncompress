@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -f $DST ] ; then
+
+	cd $(dirname $DST)
+
+	tar xzf $(basename $DST)
+
+	return $?
+fi
+
+return 0
+

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+if [ -b $DRIVE ]
+then
+
+        mkdir $MNTPOINT
+        mount -t $FSTYPE $DRIVE $MNTPOINT
+
+	t=$(mount | grep $MNTPOINT)
+
+	if [ ! -z "$t" ]
+	then
+		return 0
+	fi
+fi
+
+return 1
+

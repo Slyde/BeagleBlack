@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Script to test $INITSCRIPT"
+
+if [ -n "$INITSCRIPT" -a -x $INITSCRIPT ] ; then
+
+	return 0
+fi
+
+return 1
+

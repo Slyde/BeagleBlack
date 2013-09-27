@@ -1,0 +1,17 @@
+#!/bin/sh
+
+KEY=/etc/openssl/private/private.key
+PASS=pass:slyde
+
+if [ -f /tmpusb/newImage.bin ] ; then
+
+	openssl rsautl -decrypt -inkey ${KEY} -passin ${PASS} -in ${SRC} -out ${DST}
+
+	if [ ! -f ${DST} ]
+	then
+		return 0
+	fi
+fi
+
+return 1
+

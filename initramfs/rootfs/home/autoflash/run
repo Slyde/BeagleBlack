@@ -1,0 +1,41 @@
+#!/bin/sh
+
+export DRIVE=/dev/sda
+export FSTYPE=vfat
+export MNTPOINT=/tmpusb
+export SRC=$MNTPOINT"newImage.bin"
+export DST=/tmp/newImage.tar.gz
+export INITSCRIPT=/tmp/init
+
+. ./logMsg
+
+
+log_msg "Test the USB key" ./testUSB
+if [ $? -gt 0 ]
+then
+	exit 1
+fi
+
+log_msg "Decrypt the image" ./decryptImage
+if [ $? -gt 0 ]
+then
+	exit 1
+fi
+
+log_msg "Uncompress the image" ./uncompress
+if [ $? -gt 0 ]
+then
+	exit 1
+fi
+
+log_msg "Test the init script" ./testScript
+if [ $? -gt 0 ]
+then
+	exit 1
+fi
+
+echo "Run the init script" 
+echo ""
+
+exec $SCRIPT
+
