@@ -1,0 +1,11 @@
+#!/bin/sh
+
+t=$(mount | grep $MNTPOINT)
+
+if [ ! -z "$t" ]
+then
+	umount $MNTPOINT
+fi
+
+return 0
+

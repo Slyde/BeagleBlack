@@ -3,7 +3,7 @@
 export DRIVE=/dev/sda
 export FSTYPE=vfat
 export MNTPOINT=/tmpusb
-export SRC=$MNTPOINT"newImage.bin"
+export SRC=$MNTPOINT"/newImage.bin"
 export DST=/tmp/newImage.tar.gz
 export INITSCRIPT=/tmp/init
 
@@ -19,23 +19,28 @@ fi
 log_msg "Decrypt the image" ./decryptImage
 if [ $? -gt 0 ]
 then
+	log_msg "Unmount the USB device" ./umountUSB
 	exit 1
 fi
 
 log_msg "Uncompress the image" ./uncompress
 if [ $? -gt 0 ]
 then
+	log_msg "Unmount the USB device" ./umountUSB
 	exit 1
 fi
 
 log_msg "Test the init script" ./testScript
 if [ $? -gt 0 ]
 then
+	log_msg "Unmount the USB device" ./umountUSB
 	exit 1
 fi
 
 echo "Run the init script" 
 echo ""
 
-exec $SCRIPT
+$INITSCRIPT
+
+log_msg "Unmount the USB device" ./umountUSB
 
